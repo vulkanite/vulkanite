@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2025-2026 Ingo Wald
 // SPDX-License-Identifier: Apache-2.0
-    layer of classes that makes C++ 'understand' slang-style types like
+
+/*! This file introduces a set of classes that makes C++ 'understand' slang-style types like
     float3, int2, etc, including some operations on that (like
     normalize()) */
 #pragma once
