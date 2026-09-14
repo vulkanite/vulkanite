@@ -1,0 +1,42 @@
+## Copyright 2021-2024 The Khronos Group
+## SPDX-License-Identifier: Apache-2.0
+
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_dependency(Threads)
+
+include(${CMAKE_CURRENT_LIST_DIR}/vulkanite-config.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/vulkanite_embed_devicecode.cmake)
+if (NOT TARGET vulkanite::vulkanite)
+  message(FATAL_ERROR "CMAKE_PREFIX_PATH or vulkanite_DIR are pointing to a \
+  vulkanite build directory. Please do a full install of vulkanite \
+  (e.g. 'make install') and point to where you installed it \
+  (CMAKE_INSTALL_PREFIX in your build of vulkanite). \
+  Consuming vulkanite from a build directory is not supported.")
+endif()
+set(vulkanite_FOUND ON)
+
+set(VULKANITE_DATAROOTDIR
+  ${CMAKE_CURRENT_LIST_DIR}/../../../@CMAKE_INSTALL_DATAROOTDIR@/vulkanite
+  )
+
+foreach(component ${vulkanite_FIND_COMPONENTS})
+  # For requested component, execute its "config" script
+  message("cfind component ${component}")
+  if (EXISTS "${CMAKE_CURRENT_LIST_DIR}/${component}-config.cmake")
+    include(${CMAKE_CURRENT_LIST_DIR}/${component}-config.cmake)
+    set(vulkanite_${component}_FOUND ON)
+    message("-> ${component}_FOUND ON")
+  else()
+    set(vulkanite_${component}_FOUND OFF)
+    message("-> ${component}_FOUND OFF!!!")
+  endif()
+  message("-> vulkanite_FOUND now ${vulkanite_FOUND}")
+  add_library(vulkanite::${component} ALIAS vulkanite::vulkanite_${component})
+endforeach()
+
+check_required_components(@PROJECT_NAME@)
+message("-> vulkanite_FOUND now ${vulkanite_FOUND}")
