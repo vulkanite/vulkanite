@@ -3,7 +3,7 @@
 #pragma once
 
 #include "vulkanite/Object.h"
-#include "vulkanite/driver/spirv_reflect.h"
+//#include "vulkanite/driver/spirv_reflect.h"
 
 #define DO_REFLECT 0
 

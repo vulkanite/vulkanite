@@ -1,6 +1,5 @@
 // SPDX-FileCopyrightText: Copyright (c) 2025-2026 Ingo Wald
 // SPDX-License-Identifier: Apache-2.0
-    (similar to owl/owl.h) */
 
 #pragma once
 

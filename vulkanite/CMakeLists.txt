@@ -48,8 +48,8 @@ set(VULKANITE_FILES
   SBTObject.cpp
   
   driver/spirv.h
-  driver/spirv_reflect.h
-  driver/spirv_reflect.cpp
+  #  driver/spirv_reflect.h
+  # driver/spirv_reflect.cpp
   
   LogicalDevice.h
   LogicalDevice.cpp
